@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Splitty</string>
+    <string name="events_title">Gruppen</string>
+    <string name="action_edit_event">Gruppe editieren</string>
+    <string name="action_delete_event">Gruppe löschen</string>
+    <string name="add_event">Gruppe hinzufügen</string>
+    <string name="save">Speichern</string>
+    <string name="description">Beschreibung</string>
+    <string name="add_expense">Ausgabe hinzufügen</string>
+    <string name="amount_hint">Betrag in %s</string>
+    <string name="paid_by">Bezahlt von</string>
+    <string name="me">Ich</string>
+    <string name="add">Hinzufügen</string>
+    <string name="finish">Beenden</string>
+    <string name="debts">Schulden</string>
+    <string name="name">Name</string>
+    <string name="participants">Teilnehmer</string>
+    <string name="add_participant">Teilnehmer hinzufügen</string>
+    <string name="enter_username">Bitte gib einen Benutzernamen ein</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="recently_used">Kürzlich benutzt</string>
+    <string name="attendees">Beteiligte personen</string>
+    <string name="add_event_help">Wähle einen Namen für die neue Gruppe</string>
+    <string name="add_event_currency_help">Wähle eine Währung für die Gruppe</string>
+    <string name="add_participants_help">Füge alle Personen hinzu, mit denen du eine Rechnung teilen willst</string>
+    <string name="next">Weiter &gt;</string>
+    <string name="expense_text_with_description" formatted="false">%s für %s</string>
+    <string name="expense_text_without_description" formatted="false">%s</string>
+    <string name="expense_attendees" formatted="false">Beteiligt: %s</string>
+    <string name="remove_expense">Ausgabe entfernen</string>
+    <string name="navigation_drawer_title">Gruppe wählen</string>
+    <string name="nav_drawer_open_desc">Gruppenliste öffnen</string>
+    <string name="nav_drawer_close_desc">Gruppenliste schliessen</string>
+    <string name="start">Start &gt;</string>
+    <string name="groups_header">GRUPPEN</string>
+    <string name="welcome_message">Willkommen bei Splitty!</string>
+    <string name="your_name">Dein Name</string>
+    <string name="share">Teilen</string>
+    <string name="share_template" formatted="false">Hallo,\nDie folgenden Schulden wurden von Splitty berechnet:\n\n %s \n\n Gruss,\n %s</string>
+    <string name="add_event_help_text">Willkommen bei Splitty! Beginne mit dem erstellen einer Gruppe.</string>
+    <string name="delete_event_alert_message">Es werden alle Ausgaben in dieser Gruppe gelöscht!</string>
+    <string name="delete_event_alert_title">Gruppe löschen?</string>
+    <string name="delete">Löschen</string>
+    <string name="error_remove_user">Benutzer kann nicht entfernt werden!</string>
+    <string name="event_details_help_text">Glückwunsch! Jetzt kannst du damit beginnen, Ausgaben einzutragen. Die Beträge werden gleichmässig zwischen allen Beteiligten aufgeteilt.</string>
+	<string name="overview">Übersicht</string>
+    <string name="expenses">Ausgaben</string>
+    <string name="edit_template">Bearbeiten: %s</string>
+    <string name="settings_google_analytics">Google Analytics</string>
+    <string name="settings_google_analytics_description">Schalte Google Analytics ein um uns dabei zu helfen Splitty zu verbesseren.</string>
+    <string name="settings">Einstellungen</string>
+    <string name="beam_event">Gruppe beamen</string>
+    <string name="beam_event_title_template">Gruppe %s beamen</string>
+    <string name="beam_event_message">Tappe dein Telefon gegen ein anderes Telefon um die Gruppe zu beamen.</string>
+    <string name="beam_event_error">Android Beam oder Bluetooth ist nicht verfügbar. Die Gruppe kann nicht gebeamt werden.</string>
+    <string name="beam_event_receiving">Eine Gruppe wird empfangen</string>
+    <string name="importEvent">Importieren &gt;</string>
+    <string name="beam_communication_error">Ein Fehler ist aufgetreten. Renne um dein Leben.</string>
+    <string name="beam_event_sending">Gruppe wird gebeamt.</string>
+    <string name="beam_received">Gruppe wurde erfolgreich ausgetauscht.</string>
+    <string name="access_denied_event">Es können nur eigene Gruppen editiert werden.</string>
+    <string name="access_denied_expense">Es können nur eigene Ausgaben editiert werden.</string>
+    <string name="beam_select_yourself">Wähle aus, welcher Benutzer du bist: </string>
+    <string name="join_as_new_user">Als neues Mitglied beitreten</string>
+    <string name="can_not_join_group">Du kannst dieser Gruppe nicht beitreten.</string>
+    <string name="beam_services_unavailable">Die Gruppe kann nicht gebeamt werden, da die folgenden Dienste nicht aktiviert sind.</string>
+    <string name="beam_enable_bluetooth">Bluetooth aktivieren</string>
+    <string name="beam_enable_nfc">NFC aktivieren</string>
+    <string name="beam_enable_nfc_beam">Android Beam aktivieren</string>
+    <string name="connection_problem">Verbindungsfehler!</string>
+    <string name="mark_debt_as_paid">Willst du die Bezahlung dieser Schuld bestätigen?</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="mark_debt_as_paid_title">Schuldtilgung</string>
+    <string name="paid_debt">Schuldtilgung</string>
+</resources>

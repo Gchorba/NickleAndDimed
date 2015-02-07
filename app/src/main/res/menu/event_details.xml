@@ -1,0 +1,28 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_share"
+        android:icon="@drawable/ic_action_share"
+        android:showAsAction="always"
+        android:title="@string/share"
+        />
+    <item android:id="@+id/action_add_expense"
+        android:icon="@drawable/ic_action_new"
+        android:title="@string/add_expense"
+        android:showAsAction="always"/>
+    <item android:id="@+id/action_edit_event"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="@string/action_edit_event"
+        android:showAsAction="never"/>
+    <item android:id="@+id/action_delete_event"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:title="@string/action_delete_event"
+        android:showAsAction="never"/>
+    <item android:id="@+id/action_beam"
+        android:icon="@android:drawable/ic_menu_send"
+        android:title="@string/beam_event"
+        android:showAsAction="never"/>
+    <item android:id="@+id/action_settings"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/settings"
+        android:showAsAction="never"/>
+</menu>
