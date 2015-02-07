@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Splitty</string>
+    <string name="app_name">NickelAndDimed</string>
     <string name="events_title">Groups</string>
     <string name="action_edit_event">Edit Group</string>
     <string name="action_delete_event">Delete Group</string>
@@ -35,11 +35,13 @@
     <string name="nav_drawer_close_desc">Close group list</string>
     <string name="start">Start &gt;</string>
     <string name="groups_header">GROUPS</string>
-    <string name="welcome_message">Welcome to Splitty!</string>
+    <string name="welcome_message">Welcome to NickleAndDimed!</string>
     <string name="your_name">Your name</string>
+    <string name="your_email">Your Email</string>
+    <string name="your_phone">Your Phone Number</string>
     <string name="share">Share</string>
-    <string name="share_template" formatted="false">Hi,\nThe following debts have been calculated by Splitty:\n\n %s \n\n Regards,\n %s</string>
-    <string name="add_event_help_text">Welcome to Splitty! Start by creating a new group.</string>
+    <string name="share_template" formatted="false">Hi,\nThe following debts have been calculated by NickleAndDimed:\n\n %s \n\n Regards,\n %s</string>
+    <string name="add_event_help_text">Welcome to NickleandDimed! Start by creating a new group.</string>
     <string name="delete_event_alert_message">"You will lose all expenses assigned to this group!"</string>
     <string name="delete_event_alert_title">"Delete this group?"</string>
     <string name="delete">Delete</string>
@@ -49,11 +51,11 @@
     <string name="expenses">Expenses</string>
     <string name="edit_template">Edit: %s</string>
     <string name="settings_google_analytics">Google Analytics</string>
-    <string name="settings_google_analytics_description">Enable Google Analytics to help us improve Splitty.</string>
+    <string name="settings_google_analytics_description">Enable Google Analytics to help us improve NickleAndDimed.</string>
     <string name="settings">Settings</string>
     <string name="beam_event">Beam group</string>
     <string name="beam_event_title_template">Beam group %s</string>
-    <string name="beam_event_message">Tap your phone against another phone with Splitty installed to share this group.</string>
+    <string name="beam_event_message">Tap your phone against another phone with NickleAndDimed installed to share this group.</string>
     <string name="beam_event_error">Android Beam or Bluetooth is not available on your phone. You can not beam a group.</string>
     <string name="beam_event_receiving">Receiving a group</string>
     <string name="importEvent">Import &gt;</string>
