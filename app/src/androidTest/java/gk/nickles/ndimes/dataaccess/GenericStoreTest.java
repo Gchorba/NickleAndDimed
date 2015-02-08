@@ -1,0 +1,381 @@
+package gk.nickles.ndimes.dataaccess;
+
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.test.suitebuilder.annotation.SmallTest;
+
+import com.google.inject.Inject;
+
+import org.mockito.Mock;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import gk.nickles.ndimes.dataaccess.db.BillSplitterDatabase;
+import gk.nickles.ndimes.dataaccess.db.BillSplitterDatabaseOpenHelper;
+import gk.nickles.ndimes.dataaccess.rowmapper.RowMapper;
+import gk.nickles.ndimes.framework.BaseMockitoInstrumentationTest;
+import gk.nickles.ndimes.model.Model;
+
+import static gk.nickles.ndimes.dataaccess.db.BillSplitterDatabaseOpenHelper.Table.ID;
+import static gk.nickles.ndimes.framework.CustomMatchers.hasSize;
+import static gk.nickles.ndimes.framework.CustomMatchers.matchesContentValues;
+import static java.util.UUID.randomUUID;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.hasEntry;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyMap;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.argThat;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+public class GenericStoreTest extends BaseMockitoInstrumentationTest {
+
+    private static final String DUMMY_TABLE_NAME = "dummy";
+
+    @Mock
+    private BillSplitterDatabaseOpenHelper databaseHelper;
+
+    @Mock
+    protected BillSplitterDatabase database;
+
+    @Mock
+    protected Cursor cursor;
+
+    @Mock
+    private RowMapper<DummyModel> mapper;
+
+    @Inject
+    private GenericStore<DummyModel> store;
+
+    private DummyModel model;
+
+    @Override
+    public void setUp() throws Exception {
+        super.setUp();
+        when(databaseHelper.getDatabase()).thenReturn(database);
+        when(database.query(anyString(), anyMap())).thenReturn(cursor);
+        when(database.queryWithLike(anyString(), anyMap())).thenReturn(cursor);
+
+        store.setRowMapper(mapper);
+        model = new DummyModel(randomUUID());
+        when(mapper.map(cursor)).thenReturn(model);
+        when(mapper.getTableName()).thenReturn(DUMMY_TABLE_NAME);
+
+        when(mapper.getValues(any(DummyModel.class))).thenAnswer(new Answer<ContentValues>() {
+            @Override
+            public ContentValues answer(InvocationOnMock invocation) throws Throwable {
+                DummyModel model = (DummyModel) invocation.getArguments()[0];
+
+                ContentValues values = new ContentValues();
+                values.put(ID, model.getId().toString());
+
+                return values;
+            }
+        });
+    }
+
+    @SmallTest
+    public void testGetAllReturnsEmptyListWithZeroModels() {
+        // Given
+        when(cursor.moveToNext()).thenReturn(false);
+
+        // When
+        List<DummyModel> models = store.getAll();
+
+        // Then
+        assertEquals(0, models.size());
+    }
+
+    @SmallTest
+    public void testGetAllReturnsCorrectModelWithOneModel() {
+        // Given
+        when(cursor.moveToNext()).thenReturn(true).thenReturn(false);
+
+        // When
+        List<DummyModel> models = store.getAll();
+
+        // Then
+        assertEquals(1, models.size());
+        assertEquals(model, models.get(0));
+    }
+
+    @SmallTest
+    public void testGetAllQueriesDatabaseWithoutWhereArguments() {
+        // Given
+        when(cursor.moveToNext()).thenReturn(false);
+
+        // When
+        store.getAll();
+
+        // Then
+        verify(database, times(1)).query(DUMMY_TABLE_NAME, null);
+    }
+
+    @SmallTest
+    public void testGetByIdReturnsNullIfModelDoesNotExist() {
+        // Given
+        when(cursor.moveToNext()).thenReturn(false);
+        UUID id = UUID.randomUUID();
+
+        // When
+        Model result = store.getById(id);
+
+        // Then
+        assertNull(result);
+    }
+
+    @SmallTest
+    public void testGetByIdReturnsCorrectModelIfItExists() {
+        // Given
+        when(cursor.moveToNext()).thenReturn(true).thenReturn(false);
+        UUID id = UUID.randomUUID();
+
+        // When
+        Model result = store.getById(id);
+
+        // Then
+        assertNotNull(result);
+        assertEquals(model, result);
+    }
+
+    @SmallTest
+    public void testPersistThrowsNullPointerExceptionIfNoModelProvided() {
+        try {
+            store.persist(null);
+            fail("No exception has been thrown");
+        } catch (NullPointerException e) {
+            assertNotNull(e);
+        }
+    }
+
+    @SmallTest
+    public void testPersistWithNewModel() {
+        // Given
+        DummyModel model = new DummyModel();
+
+        // When
+        store.persist(model);
+
+        // Then
+        assertNotNull(model.getId());
+        verify(database, times(1)).insert(anyString(), any(ContentValues.class));
+    }
+
+    @SmallTest
+    public void testPersistWithExistingModel() {
+        // Given
+        UUID id = UUID.randomUUID();
+        DummyModel model = new DummyModel(id);
+
+        // When
+        store.persist(model);
+
+        // Then
+        assertEquals(id, model.getId());
+        verify(database, times(1)).update(anyString(), argThat(matchesContentValues(ID, id.toString())));
+    }
+
+    @SmallTest
+    public void testCreateExistingModelThrowsNullPointerExceptionIfNoModelProvided() {
+        try {
+            store.createExistingModel(null);
+            fail("No exception has been thrown");
+        } catch (NullPointerException e) {
+            assertNotNull(e);
+        }
+    }
+
+    @SmallTest
+    public void testCreateExistingModelThrowsIllegalArgumentExceptionIfNewModelProvided() {
+        try {
+            DummyModel model = new DummyModel();
+            store.createExistingModel(model);
+            fail("No exception has been thrown");
+        } catch (IllegalArgumentException e) {
+            assertNotNull(e);
+        }
+    }
+
+    @SmallTest
+    public void testCreateExistingModelInsertsModelWithValuesFromRowMapper() {
+        // Given
+        DummyModel model = new DummyModel(randomUUID());
+
+        // When
+        store.createExistingModel(model);
+
+        // Then
+        verify(database, times(1)).insert(eq(DUMMY_TABLE_NAME),
+                argThat(matchesContentValues(ID, model.getId().toString())));
+
+    }
+
+    @SmallTest
+    public void testRemoveByIdThrowsNullPointerExceptionIfNoIdProvided() {
+        try {
+            store.removeById(null);
+            fail("No exception has been thrown");
+        } catch (NullPointerException e) {
+            assertNotNull(e);
+        }
+    }
+
+    @SmallTest
+    public void testRemoveByIdCallsRemoveAllWithCorrectWhereArgument() {
+        // Given
+        DummyModel model = new DummyModel(randomUUID());
+
+        // When
+        store.removeById(model.getId());
+
+        // Then
+        verify(database, times(1)).removeAll(eq(DUMMY_TABLE_NAME), argThat(allOf(hasSize(1), hasEntry(ID, model.getId().toString()))));
+    }
+
+    @SmallTest
+    public void testRemoveAllAcceptsNullAsWhereArgument() {
+        // When
+        store.removeAll(null);
+
+        // Then
+        verify(database, times(1)).removeAll(DUMMY_TABLE_NAME, null);
+    }
+
+    @SmallTest
+    public void testRemoveAllPassesOnNonNullWhereArgument() {
+        // When
+        HashMap<String, String> where = new HashMap<String, String>();
+        store.removeAll(where);
+
+        // Then
+        verify(database, times(1)).removeAll(DUMMY_TABLE_NAME, where);
+    }
+
+    @SmallTest
+    public void testGetModelsByQueryAcceptsNullAsWhereArgument() {
+        // Given
+        when(cursor.moveToNext()).thenReturn(false);
+
+        // When
+        store.getModelsByQuery(null);
+
+        // Then
+        verify(database, times(1)).query(DUMMY_TABLE_NAME, null);
+    }
+
+    @SmallTest
+    public void testGetModelsByQueryPassesOnCorrectWhereArgument() {
+        // Given
+        when(cursor.moveToNext()).thenReturn(false);
+        Map<String, String> where = new HashMap<String, String>();
+
+        // When
+        store.getModelsByQuery(where);
+
+        // Then
+        verify(database, times(1)).query(DUMMY_TABLE_NAME, where);
+    }
+
+    @SmallTest
+    public void testGetModelsByQueryReturnsEmptyListIfNoModelIsStored() {
+        // Given
+        when(cursor.moveToNext()).thenReturn(false);
+        Map<String, String> where = new HashMap<String, String>();
+
+        // When
+        List<DummyModel> models = store.getModelsByQuery(where);
+
+        // Then
+        assertNotNull(models);
+        assertEquals(0, models.size());
+    }
+
+    @SmallTest
+    public void testGetModelsByQueryReturnsCorrectModel() {
+        // Given
+        when(cursor.moveToNext()).thenReturn(true).thenReturn(false);
+        when(mapper.map(cursor)).thenReturn(model);
+        Map<String, String> where = new HashMap<String, String>();
+
+        // When
+        List<DummyModel> models = store.getModelsByQuery(where);
+
+        // Then
+        assertNotNull(models);
+        assertEquals(1, models.size());
+        assertEquals(model, models.get(0));
+    }
+
+    @SmallTest
+    public void testGetModelsByQueryWithLikeAcceptsNullAsWhereArgument() {
+        // Given
+        when(cursor.moveToNext()).thenReturn(false);
+
+        // When
+        store.getModelsByQueryWithLike(null);
+
+        // Then
+        verify(database, times(1)).queryWithLike(DUMMY_TABLE_NAME, null);
+    }
+
+    @SmallTest
+    public void testGetModelsByQueryWithLikePassesOnCorrectWhereArgument() {
+        // Given
+        when(cursor.moveToNext()).thenReturn(false);
+        Map<String, String> where = new HashMap<String, String>();
+
+        // When
+        store.getModelsByQueryWithLike(where);
+
+        // Then
+        verify(database, times(1)).queryWithLike(DUMMY_TABLE_NAME, where);
+    }
+
+    @SmallTest
+    public void testGetModelsByQueryWithLikeReturnsEmptyListIfNoModelIsStored() {
+        // Given
+        when(cursor.moveToNext()).thenReturn(false);
+        Map<String, String> where = new HashMap<String, String>();
+
+        // When
+        List<DummyModel> models = store.getModelsByQueryWithLike(where);
+
+        // Then
+        assertNotNull(models);
+        assertEquals(0, models.size());
+    }
+
+    @SmallTest
+    public void testGetModelsByQueryWithLikeReturnsCorrectModel() {
+        // Given
+        when(cursor.moveToNext()).thenReturn(true).thenReturn(false);
+        when(mapper.map(cursor)).thenReturn(model);
+        Map<String, String> where = new HashMap<String, String>();
+
+        // When
+        List<DummyModel> models = store.getModelsByQuery(where);
+
+        // Then
+        assertNotNull(models);
+        assertEquals(1, models.size());
+        assertEquals(model, models.get(0));
+    }
+
+
+    private class DummyModel extends Model {
+        public DummyModel() {
+        }
+
+        public DummyModel(UUID id) {
+            super(id);
+        }
+    }
+}

@@ -5,13 +5,13 @@
     <!-- Enable automatic Activity measurement -->
     <bool name="ga_autoActivityTracking">true</bool>
 
-    <screenName name="ch.pantas.billsplitter.ui.StartEvent">
+    <screenName name="gk.nickles.ndimes.ui.StartEvent">
         Start Event
     </screenName>
-    <screenName name="ch.pantas.billsplitter.ui.AddEvent">
+    <screenName name="gk.nickles.ndimes.ui.AddEvent">
         Add Event
     </screenName>
-    <screenName name="ch.pantas.billsplitter.ui.AddExpense">
+    <screenName name="gk.nickles.ndimes.ui.AddExpense">
         Add Expense
     </screenName>
     <string name="ga_trackingId">UA-56026625-1</string>

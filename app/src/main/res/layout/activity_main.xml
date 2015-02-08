@@ -22,7 +22,7 @@
            android:layout_height="wrap_content"
            android:layout_marginTop="20dp"
            android:onClick="onBuyPressed"
-           android:text="Buy a Thing" />
+           android:text="Pay for things" />
 
        <Button
            android:id="@+id/futurePaymentBtn"

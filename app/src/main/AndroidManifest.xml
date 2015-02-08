@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ch.pantas.splitty">
+    package="gk.nickles.splitty">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -23,31 +23,31 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/BillSplitterTheme"
-        android:name="ch.pantas.billsplitter.BillSplitterApplication">
+        android:name="gk.nickles.ndimes.BillSplitterApplication">
 
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="ch.pantas.billsplitter.ui.Login"
+            android:name="gk.nickles.ndimes.ui.Login"
             android:screenOrientation="portrait">
         </activity>
 
         <activity
-            android:name="ch.pantas.billsplitter.ui.VenmoWebViewActivity"
+            android:name="gk.nickles.ndimes.ui.VenmoWebViewActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name="ch.pantas.billsplitter.ui.StartEvent"
+            android:name="gk.nickles.ndimes.ui.StartEvent"
             android:screenOrientation="portrait" />
         <activity
-            android:name="ch.pantas.billsplitter.ui.AddEvent"
+            android:name="gk.nickles.ndimes.ui.AddEvent"
             android:screenOrientation="portrait" />
         <activity
-            android:name="ch.pantas.billsplitter.ui.AddParticipants"
+            android:name="gk.nickles.ndimes.ui.AddParticipants"
             android:screenOrientation="portrait" />
         <activity
-            android:name="ch.pantas.billsplitter.ui.EventDetails"
+            android:name="gk.nickles.ndimes.ui.EventDetails"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -57,34 +57,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="ch.pantas.billsplitter.ui.AddExpense"
-            android:parentActivityName="ch.pantas.billsplitter.ui.EventDetails"
+            android:name="gk.nickles.ndimes.ui.AddExpense"
+            android:parentActivityName="gk.nickles.ndimes.ui.EventDetails"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ch.pantas.billsplitter.ui.EventDetails" />
+                android:value="gk.nickles.ndimes.ui.EventDetails" />
         </activity>
         <activity
-            android:name="ch.pantas.billsplitter.ui.BillSplitterSettings"
-            android:parentActivityName="ch.pantas.billsplitter.ui.EventDetails"
+            android:name="gk.nickles.ndimes.ui.BillSplitterSettings"
+            android:parentActivityName="gk.nickles.ndimes.ui.EventDetails"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ch.pantas.billsplitter.ui.EventDetails" />
+                android:value="gk.nickles.ndimes.ui.EventDetails" />
         </activity>
-        <activity android:name="ch.pantas.billsplitter.ui.SampleActivity" />
+        <activity android:name="gk.nickles.ndimes.ui.SampleActivity" />
         <activity
-            android:name="ch.pantas.billsplitter.ui.BeamEvent"
-            android:parentActivityName="ch.pantas.billsplitter.ui.EventDetails"
+            android:name="gk.nickles.ndimes.ui.BeamEvent"
+            android:parentActivityName="gk.nickles.ndimes.ui.EventDetails"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ch.pantas.billsplitter.ui.EventDetails" />
+                android:value="gk.nickles.ndimes.ui.EventDetails" />
         </activity>
         <activity
-            android:name="ch.pantas.billsplitter.ui.BeamEventReceiver"
+            android:name="gk.nickles.ndimes.ui.BeamEventReceiver"
             android:screenOrientation="portrait"
-            android:parentActivityName="ch.pantas.billsplitter.ui.EventDetails"
+            android:parentActivityName="gk.nickles.ndimes.ui.EventDetails"
             >
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
@@ -93,7 +93,7 @@
             </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ch.pantas.billsplitter.ui.EventDetails" />
+                android:value="gk.nickles.ndimes.ui.EventDetails" />
         </activity>
 
         <service android:name="com.paypal.android.sdk.payments.PayPalService"
@@ -113,7 +113,7 @@
             android:name="io.card.payment.CardIOActivity"
             android:configChanges="keyboardHidden|orientation" />
         <activity android:name="io.card.payment.DataEntryActivity" />
-        <receiver android:name="ch.pantas.billsplitter.receivers.UpdateReceiver">
+        <receiver android:name="gk.nickles.ndimes.receivers.UpdateReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>

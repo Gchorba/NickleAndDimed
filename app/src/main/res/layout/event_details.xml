@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ch.pantas.billsplitter.ui.FixedTabsView
+            <gk.nickles.ndimes.ui.FixedTabsView
                 android:id="@+id/event_details_tabs"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
