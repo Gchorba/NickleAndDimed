@@ -1,5 +1,6 @@
 package ch.pantas.billsplitter.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,7 +26,10 @@ public class Login extends RoboActivity {
 
     @InjectView(R.id.user_name)
     private EditText nameField;
-
+    @InjectView(R.id.user_email)
+    private EditText emailField;
+    @InjectView(R.id.user_phone)
+    private EditText phoneField;
     @Inject
     private SharedPreferenceService sharedPreferenceService;
 
@@ -49,16 +53,17 @@ public class Login extends RoboActivity {
             handleUserLoggedIn();
             return;
         }
-
         setContentView(R.layout.login);
         setTitle(R.string.app_name);
         OnClickListener listnr=new OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Intent venmoIntent = VenmoLibrary.openVenmoPayment("2346", "NickleAndDimed", "406106603", "10", "note", "charge");
+//                startActivityForResult(venmoIntent, 2346);
+                //Intent myIntent = new Intent(Login.this,
+               //         MyScanActivity.class);
+              //  startActivity(myIntent);
 
-                Intent myIntent = new Intent(Login.this,
-                        MyScanActivity.class);
-                startActivity(myIntent);
             }
         };
         Button btn =(Button) findViewById(R.id.btn);
@@ -78,12 +83,14 @@ public class Login extends RoboActivity {
 
     public void onStartClicked() {
         String userName = nameField.getText().toString();
+        String userEmail = emailField.getText().toString();
+        String userPhone = phoneField.getText().toString();
         if (userName == null || userName.isEmpty()) {
             nameField.setBackgroundColor(getResources().getColor(R.color.error_color));
             return;
         }
 
-        User me = new User(userName);
+        User me = new User(userName, userEmail, userPhone);
         loginService.login(me);
 
         activityStarter.startStartEvent(this);

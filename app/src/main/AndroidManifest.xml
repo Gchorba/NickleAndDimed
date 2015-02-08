@@ -37,6 +37,10 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name="ch.pantas.billsplitter.ui.VenmoWebViewActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name="ch.pantas.billsplitter.ui.StartEvent"
             android:screenOrientation="portrait" />
         <activity

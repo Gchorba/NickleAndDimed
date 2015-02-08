@@ -52,6 +52,9 @@ public class AddParticipants extends RoboActivity {
     @InjectView(R.id.user_name)
     private EditText userNameField;
 
+    @InjectView(R.id.user_phone)
+    private EditText userPhone;
+
     @InjectView(R.id.participant_container)
     private LinearLayout participantContainer;
 
@@ -170,7 +173,7 @@ public class AddParticipants extends RoboActivity {
         disableSearchMode();
         reloadLists();
         userNameField.clearFocus();
-        // TODO: how to hide software keyboard?
+
     }
 
     private void clearNewUserName() {

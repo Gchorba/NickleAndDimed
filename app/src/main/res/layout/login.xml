@@ -26,8 +26,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:layout_width="200dip"
-            android:layout_height="200dip"
-            android:id="@+id/" />
+            android:layout_height="200dip"/>
         <EditText
             android:id="@+id/user_name"
             android:hint="@string/your_name"

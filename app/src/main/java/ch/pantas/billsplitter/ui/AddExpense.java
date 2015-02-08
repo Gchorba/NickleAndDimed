@@ -1,6 +1,7 @@
 package ch.pantas.billsplitter.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -291,10 +292,42 @@ public class AddExpense extends RoboActivity implements TagDeletedListener {
             Attendee newAttendee = new Attendee(expense.getId(), participant.getId());
             attendeeStore.persist(newAttendee);
         }
+        String bill = Integer.toString(amountCents/100);
+      //  String uPhone = payingUser.getPhone();
+        Intent venmoIntent = VenmoLibrary.openVenmoPayment("2346", "NickleAndDimed", "4046106603",bill, description, "charge");
+        startActivityForResult(venmoIntent, 2346);
 
+//        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://venmo.com/?txn=charge&recipients="+ payingUser.getPhone()+"&amount="+amountCents/100+"&note="+description+"&audience=public"));
+//        startActivity(browserIntent);
         finish();
     }
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        switch(requestCode) {
+            case 2346: {
+                if(resultCode == RESULT_OK) {
+                    String signedrequest = data.getStringExtra("signedrequest");
+                    if(signedrequest != null) {
+                        VenmoLibrary.VenmoResponse response = (new VenmoLibrary()).validateVenmoPaymentResponse(signedrequest, "uAfy6JAHmmcXUXMLtjbgzmNsfRsHXJEm");
+                        if(response.getSuccess().equals("1")) {
+                            //Payment successful.  Use data from response object to display a success message
+                            String note = response.getNote();
+                            String amount = response.getAmount();
+                        }
+                    }
+                    else {
+                        String error_message = data.getStringExtra("error_message");
+                        //An error ocurred.  Make sure to display the error_message to the user
+                    }
+                }
+                else if(resultCode == RESULT_CANCELED) {
+                    //The user cancelled the payment
+                }
+                break;
+            }
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

@@ -33,6 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"/>
+
         <ImageView
             android:id="@+id/cancel_searchmode"
             android:src="@drawable/ic_action_cancel"
@@ -42,6 +43,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    <EditText
+        android:id="@+id/user_phone"
+        android:hint="@string/add_participant"
+        android:inputType="textCapWords"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"/>
     <LinearLayout
         android:id="@+id/participant_container"
         android:background="@drawable/container_background"
