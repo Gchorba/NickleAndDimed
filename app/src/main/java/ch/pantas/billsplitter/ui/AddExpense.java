@@ -2,6 +2,7 @@ package ch.pantas.billsplitter.ui;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,9 +11,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.analytics.HitBuilders;
@@ -71,6 +75,12 @@ public class AddExpense extends RoboActivity implements TagDeletedListener {
     @InjectView(R.id.expense_amount)
     private EditText amountField;
 
+    private RadioGroup radioGroup;
+
+    private RadioButton venbtn, palbtn;
+
+
+
     @InjectView(R.id.payer_grid)
     private GridView payerGrid;
 
@@ -114,6 +124,7 @@ public class AddExpense extends RoboActivity implements TagDeletedListener {
     private Expense expense;
     private int amountCents = 0;
     private TextWatcher descriptionTextWatcher;
+private Boolean derp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +136,12 @@ public class AddExpense extends RoboActivity implements TagDeletedListener {
         tracker.setScreenName("ch.pantas.billsplitter.ui.AddExpense");
 
         tracker.send(new HitBuilders.AppViewBuilder().build());
+
+
+
+
+
+
     }
 
     @Override
@@ -199,7 +216,7 @@ public class AddExpense extends RoboActivity implements TagDeletedListener {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (view.getId() == R.id.tag_item_delete) {
-                    Toast.makeText(AddExpense.this, "Juhuuuu", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddExpense.this, "Bok", Toast.LENGTH_LONG).show();
                 }
                 Tag tag = (Tag) adapterView.getItemAtPosition(i);
                 tagStore.persist(tag);
@@ -207,6 +224,8 @@ public class AddExpense extends RoboActivity implements TagDeletedListener {
                 tagGridContainer.setVisibility(GONE);
             }
         });
+
+
 
         payerGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -294,12 +313,43 @@ public class AddExpense extends RoboActivity implements TagDeletedListener {
         }
         String bill = Integer.toString(amountCents/100);
       //  String uPhone = payingUser.getPhone();
-        Intent venmoIntent = VenmoLibrary.openVenmoPayment("2346", "NickleAndDimed", "4046106603",bill, description, "charge");
-        startActivityForResult(venmoIntent, 2346);
 
-//        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://venmo.com/?txn=charge&recipients="+ payingUser.getPhone()+"&amount="+amountCents/100+"&note="+description+"&audience=public"));
-//        startActivity(browserIntent);
+        // find which radioButton is checked by id
+        if( derp == true) {
+
+            Intent venmoIntent = VenmoLibrary.openVenmoPayment("2346", "NickleAndDimed", "4046106603", bill, description, "charge");
+            startActivityForResult(venmoIntent, 2346);
+
+        } else {
+//            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://venmo.com/?txn=charge&recipients="+ payingUser.getPhone()+"&amount="+amountCents/100+"&note="+description+"&audience=public"));
+//            startActivity(browserIntent);
+            Intent myIntent = new Intent(this,
+                    SampleActivity.class);
+            startActivity(myIntent);
+
+        }
+
+
+
         finish();
+    }
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.radio_pirates:
+                if (checked)
+                    derp=true;
+                    // Pirates are the best
+                    break;
+            case R.id.radio_ninjas:
+                if (checked)
+                    derp=false;
+                    // Ninjas rule
+                    break;
+        }
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
@@ -352,6 +402,8 @@ public class AddExpense extends RoboActivity implements TagDeletedListener {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
     @Override
     public void onTagDelete(Tag tag) {

@@ -60,9 +60,9 @@ public class Login extends RoboActivity {
             public void onClick(View v) {
 //                Intent venmoIntent = VenmoLibrary.openVenmoPayment("2346", "NickleAndDimed", "406106603", "10", "note", "charge");
 //                startActivityForResult(venmoIntent, 2346);
-                //Intent myIntent = new Intent(Login.this,
-               //         MyScanActivity.class);
-              //  startActivity(myIntent);
+              Intent myIntent = new Intent(Login.this,
+                       SampleActivity.class);
+                startActivity(myIntent);
 
             }
         };

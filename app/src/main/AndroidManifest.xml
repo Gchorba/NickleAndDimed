@@ -7,15 +7,15 @@
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <!-- Permission to use camera - required -->
-    <uses-permission android:name="android.permission.CAMERA" />
 
-    <!-- Permission to vibrate - recommended, allows vibration feedback on scan -->
+    <!-- for card.io card scanning -->
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
-    <!-- Camera features - recommended -->
     <uses-feature android:name="android.hardware.camera" android:required="false" />
     <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+    <!-- Permission to vibrate - recommended, allows vibration feedback on scan -->
+
     <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
 
     <application
@@ -32,10 +32,7 @@
             android:name="ch.pantas.billsplitter.ui.Login"
             android:screenOrientation="portrait">
         </activity>
-        <activity
-            android:name="ch.pantas.billsplitter.ui.MyScanActivity"
-            android:screenOrientation="portrait">
-        </activity>
+
         <activity
             android:name="ch.pantas.billsplitter.ui.VenmoWebViewActivity"
             android:screenOrientation="portrait">
@@ -75,6 +72,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ch.pantas.billsplitter.ui.EventDetails" />
         </activity>
+        <activity android:name="ch.pantas.billsplitter.ui.SampleActivity" />
         <activity
             android:name="ch.pantas.billsplitter.ui.BeamEvent"
             android:parentActivityName="ch.pantas.billsplitter.ui.EventDetails"
@@ -97,7 +95,23 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ch.pantas.billsplitter.ui.EventDetails" />
         </activity>
-        <activity android:name="io.card.payment.CardIOActivity" android:configChanges="keyboardHidden|orientation" />
+
+        <service android:name="com.paypal.android.sdk.payments.PayPalService"
+            android:exported="false" />
+
+        <activity android:name="com.paypal.android.sdk.payments.PaymentActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.LoginActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.PaymentMethodActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.PaymentConfirmActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.PayPalFuturePaymentActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.FuturePaymentConsentActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.FuturePaymentInfoActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.PayPalProfileSharingActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.ProfileSharingConsentActivity" />
+
+        <activity
+            android:name="io.card.payment.CardIOActivity"
+            android:configChanges="keyboardHidden|orientation" />
         <activity android:name="io.card.payment.DataEntryActivity" />
         <receiver android:name="ch.pantas.billsplitter.receivers.UpdateReceiver">
             <intent-filter>

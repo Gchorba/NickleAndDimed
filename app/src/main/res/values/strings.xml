@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="ok">ok</string>
     <string name="app_name">NickelAndDimed</string>
     <string name="events_title">Groups</string>
     <string name="action_edit_event">Edit Group</string>

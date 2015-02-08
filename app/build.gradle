@@ -31,7 +31,6 @@ dependencies {
     compile 'com.android.support:support-v4:21.0.0'
     compile 'com.google.android.gms:play-services:6.1.+'
     compile 'com.google.code.gson:gson:2.3'
-    compile 'io.card:android-sdk:4.0.0'
     androidTestCompile files('libs/espresso-1.1.jar')
     androidTestCompile files('libs/testrunner-1.1.jar')
     androidTestCompile files('libs/testrunner-runtime-1.1.jar')
@@ -44,4 +43,5 @@ dependencies {
         exclude group: 'org.hamcrest'
     }
     compile files('libs/json-simple-1.1.1.jar')
+    compile files('libs/PayPalAndroidSDK-2.8.5.jar')
 }

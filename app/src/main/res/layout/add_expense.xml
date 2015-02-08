@@ -14,6 +14,27 @@
         android:inputType="textCapWords"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
+
+
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton android:id="@+id/radio_pirates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Venmo"
+                android:onClick="onRadioButtonClicked"
+                android:layout_weight=".5" />
+            <RadioButton android:id="@+id/radio_ninjas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Paypal/Card"
+                android:onClick="onRadioButtonClicked"
+                android:layout_weight=".5" />
+        </RadioGroup>
+
+
     <LinearLayout
         android:id="@+id/tag_grid_container"
         android:visibility="gone"
