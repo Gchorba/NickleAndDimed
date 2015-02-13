@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <!-- for card.io card scanning -->
     <uses-permission android:name="android.permission.CAMERA" />

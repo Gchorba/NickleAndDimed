@@ -80,13 +80,16 @@ public class BillSplitterDatabaseOpenHelper extends SQLiteOpenHelper {
 
         public static final String ID = "_id";
         public static final String NAME = "Name";
-
+        public static final String EMAIL = "Email";
+        public static final String PHONE = "Phone";
 
         public static void onCreate(SQLiteDatabase db) {
             db.execSQL(
                     "CREATE TABLE " + TABLE + "("
                             + ID + " TEXT PRIMARY KEY, "
-                            + NAME + " TEXT);"
+                            + NAME + " TEXT, "
+                            + EMAIL + " TEXT, "
+                            + PHONE + " TEXT);"
             );
         }
 

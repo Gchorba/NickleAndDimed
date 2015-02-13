@@ -1,6 +1,7 @@
 package gk.nickles.ndimes.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -54,19 +55,20 @@ public class Login extends RoboActivity {
         }
         setContentView(R.layout.login);
         setTitle(R.string.app_name);
-        OnClickListener listnr=new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent venmoIntent = VenmoLibrary.openVenmoPayment("2346", "NickleAndDimed", "406106603", "10", "note", "charge");
-//                startActivityForResult(venmoIntent, 2346);
-              Intent myIntent = new Intent(Login.this,
-                       SampleActivity.class);
-                startActivity(myIntent);
+//        OnClickListener listnr=new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                Intent venmoIntent = VenmoLibrary.openVenmoPayment("2346", "NickleAndDimed", "406106603", "10", "note", "charge");
+////                startActivityForResult(venmoIntent, 2346);
+//              Intent myIntent = new Intent(Login.this,
+//                       SampleActivity.class);
+//                startActivity(myIntent);
+//
+//            }
+//        };
+//        Button btn =(Button) findViewById(R.id.btn);
+//        btn.setOnClickListener(listnr);
 
-            }
-        };
-        Button btn =(Button) findViewById(R.id.btn);
-        btn.setOnClickListener(listnr);
     }
 
 
@@ -90,6 +92,7 @@ public class Login extends RoboActivity {
         }
 
         User me = new User(userName, userEmail, userPhone);
+       System.out.println(me.toString());
         loginService.login(me);
 
         activityStarter.startStartEvent(this);

@@ -6,9 +6,11 @@ public class User extends Model {
 
     private String name, email,phone;
 
-    public User(UUID id, String name) {
+    public User(UUID id,String name, String email, String phone) {
         super(id);
         this.name = name;
+        this.email =email;
+        this.phone=phone;
     }
 
     public User(String name){
@@ -26,7 +28,9 @@ public class User extends Model {
 
     public void setName(String name) { this.name = name; }
 
-    public String getEmail() { return email;}
+    public String getEmail() {
+       // String emails = "stuff";
+        return email;}
     public String getPhone() {return phone;}
     public void setEmail(String email) {this.email=email;}
     public void setPhone(String phone) {this.phone=phone;}

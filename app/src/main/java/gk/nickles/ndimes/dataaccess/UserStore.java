@@ -9,8 +9,8 @@ import java.util.Map;
 
 import gk.nickles.ndimes.dataaccess.rowmapper.UserRowMapper;
 import gk.nickles.ndimes.model.User;
-
 import static gk.nickles.ndimes.dataaccess.db.BillSplitterDatabaseOpenHelper.UserTable.NAME;
+import static gk.nickles.ndimes.dataaccess.db.BillSplitterDatabaseOpenHelper.UserTable.EMAIL;
 import static com.google.inject.internal.util.$Preconditions.checkArgument;
 import static com.google.inject.internal.util.$Preconditions.checkNotNull;
 

@@ -1,9 +1,11 @@
 package gk.nickles.ndimes.ui;
+import gk.nickles.ndimes.services.UserService;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -127,12 +129,12 @@ private Boolean derp;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_expense);
-        Tracker tracker = ((BillSplitterApplication) getApplication()).getTracker(
-                BillSplitterApplication.TrackerName.APP_TRACKER);
+       // Tracker tracker = ((BillSplitterApplication) getApplication()).getTracker(
+       //         BillSplitterApplication.TrackerName.APP_TRACKER);
 
-        tracker.setScreenName("ch.pantas.billsplitter.ui.AddExpense");
+       // tracker.setScreenName("ch.pantas.billsplitter.ui.AddExpense");
 
-        tracker.send(new HitBuilders.AppViewBuilder().build());
+       // tracker.send(new HitBuilders.AppViewBuilder().build());
 
 
 
@@ -148,6 +150,7 @@ private Boolean derp;
         extractDataFromIntent(getIntent());
 
         setTitle(event.getName());
+
 
         if (expense == null) {
             setUpAddScreen();
@@ -230,6 +233,8 @@ private Boolean derp;
                 User user = (User) adapterView.getItemAtPosition(i);
                 selectPayer(user);
                 selectAllAttendees();
+                String username = userService.getMe().getPhone();
+                System.out.println(username);
             }
         });
 
@@ -238,6 +243,8 @@ private Boolean derp;
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 User user = (User) adapterView.getItemAtPosition(i);
                 toggleAttendee(user);
+                String username = userService.getMe().getPhone();
+                System.out.println(username);
             }
         });
     }
@@ -309,12 +316,12 @@ private Boolean derp;
             attendeeStore.persist(newAttendee);
         }
         String bill = Integer.toString(amountCents/100);
-      //  String uPhone = payingUser.getPhone();
+        String uPhone = userService.getMe().getPhone();
 
         // find which radioButton is checked by id
         if( derp == true) {
 
-            Intent venmoIntent = VenmoLibrary.openVenmoPayment("2346", "NickleAndDimed", "4046106603", bill, description, "charge");
+            Intent venmoIntent = VenmoLibrary.openVenmoPayment("2346", "NickleAndDimed", uPhone, bill, description, "charge");
             startActivityForResult(venmoIntent, 2346);
 
         } else {
